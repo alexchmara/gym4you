@@ -4,14 +4,16 @@ using Gym4you.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Gym4you.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190408122044_AddEventFix")]
+    partial class AddEventFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,11 +27,11 @@ namespace Gym4you.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Amount");
-
                     b.Property<DateTime>("Date");
 
-                    b.Property<int>("InstructorFK");
+                    b.Property<int?>("InstructorId");
+
+                    b.Property<int>("MaxParticipants");
 
                     b.Property<string>("Title");
 
@@ -37,28 +39,9 @@ namespace Gym4you.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("InstructorFK");
+                    b.HasIndex("InstructorId");
 
                     b.ToTable("Events");
-                });
-
-            modelBuilder.Entity("Gym4you.Models.EventUser", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("EventId");
-
-                    b.Property<string>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EventId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("EventUser");
                 });
 
             modelBuilder.Entity("Gym4you.Models.Instructor", b =>
@@ -245,19 +228,7 @@ namespace Gym4you.Data.Migrations
                 {
                     b.HasOne("Gym4you.Models.Instructor", "Instructor")
                         .WithMany("Events")
-                        .HasForeignKey("InstructorFK")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Gym4you.Models.EventUser", b =>
-                {
-                    b.HasOne("Gym4you.Models.Event", "Event")
-                        .WithMany()
-                        .HasForeignKey("EventId");
-
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("InstructorId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
