@@ -1,0 +1,16 @@
+﻿@model List<Gym4you.Models.Event>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+    <h1>Calendar</h1>
+
+<div class="container-fluid">
+
+    <a asp-action="" class="previous round float-left"><span class="text-dark text-lg-center">&#8249;</span></a>
+    <a href="#" class="next round float-right"><span class="text-dark text-lg-center">&#8250;</span></a>
+</div>
+<div class="container-fluid">
+    <calendar month="@DateTime.Now.Month" year="@DateTime.Now.Year" events="Model" />
+</div>
