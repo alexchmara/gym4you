@@ -8,16 +8,19 @@ using Microsoft.EntityFrameworkCore;
 using Gym4you.Data;
 using Gym4you.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Gym4you.Controllers
 {
+    [Authorize]
     public class CalendarController : Controller
     {
         private readonly ApplicationDbContext _context;
-        //private readonly UserManager<ApplicationUser> _userManager;
-        public CalendarController(ApplicationDbContext context)
+        private readonly UserManager<IdentityUser> _userManager;
+        public CalendarController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Calendar
@@ -158,24 +161,24 @@ namespace Gym4you.Controllers
             return _context.Events.Any(e => e.Id == id);
         }
 
+        [HttpPost]
 
-        //public async Task<IActionResult> AddUserToEvent(Event @event)
-        //{
-        //    IdentityUser user = await userManager.FindByNameAsync(HttpContext.User.Identity.Name);
-        //    EventUser eventUser = new EventUser()
-        //    {
-        //        User = HttpContext.User.Identity,
+        public async Task<IActionResult> AddUserToEvent([FromBody] Event eventId)
+        {
+            IdentityUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
+            Event eventObject = await _context.FindAsync<Event>(eventId.Id);
+            EventUser eventUser = new EventUser()
+            {
+                User = user,
+                Event = eventObject
+            };
 
-        //    }
-        //    _context.EventUser.Add(@event);
-        //    await _context.SaveChangesAsync();
-        //    return RedirectToAction(nameof(Index));
+            _context.EventUser.Add(eventUser);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
 
-        //    ViewData["InstructorFK"] = new SelectList(_context.Instructors, "Id", "Id", @event.InstructorFK);
-        //    return View(@event);
-        //}
+        }
 
     }
-
 
 }

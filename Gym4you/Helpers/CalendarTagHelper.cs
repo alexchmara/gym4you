@@ -104,10 +104,12 @@ namespace Gym4you.Helpers
                 {
                     foreach (var e in eventsList)
                     {
-                        xElements.Add(new XElement("p", new XElement("a",
-                                               new XAttribute("class", $"event d-block p-1 pl-2 pr-2 mb-1 rounded text-truncate small bg-{e.Type} text-white"),
+                        xElements.Add(new XElement("p", new XElement("button",
+                                               new XAttribute("class", $"event d-block p-1 pl-2 pr-2 mb-1 rounded text-truncate small bg-{e.Type} text-white btn"),
                                                new XAttribute("title", e.Instructor.FirstName + e.Title ?? ""),
-                                               new XAttribute("href", "/"),
+                                               new XAttribute("data-toggle", "modal"),
+                                               new XAttribute("data-target", "#exampleModalCenter"),
+                                               new XAttribute("onclick", $"AddUserToEvent( {e.Id})"),
                                                new XElement("span", new XAttribute("class", "eventDetail"),
                                                $"{ e.Date.TimeOfDay } { e.Title }"),
                                                new XElement("span", new XAttribute("class", "eventDetail"),
