@@ -9,6 +9,9 @@ using Gym4you.Data;
 using Gym4you.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using Gym4you.Models.ViewModels;
+using System.Net;
+using System.Net.Mime;
 
 namespace Gym4you.Controllers
 {
@@ -24,137 +27,26 @@ namespace Gym4you.Controllers
         }
 
         // GET: Calendar
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? month, int? year)
         {
-            var applicationDbContext = _context.Events.Include(p => p.Instructor);
-            return View(await applicationDbContext.ToListAsync());
+            month = month ?? DateTime.Now.Month;
+            year = year ?? DateTime.Now.Year;
+            DateTime dateTime = new DateTime(year ?? DateTime.Now.Year, month ?? DateTime.Now.Month, 1);
+            var applicationDbContext = await _context.Events.Include(p => p.Instructor).Where(p => p.Date.Month == (month ?? DateTime.Now.Month) && p.Date.Year == (year ?? DateTime.Now.Year)).ToListAsync();
+
+            CalendarViewModel calendarViewModel = new CalendarViewModel()
+            {
+                Events = applicationDbContext,
+                Month = month ?? DateTime.Now.Month,
+                Year = year ?? DateTime.Now.Year,
+                PrevMonth = dateTime.AddMonths(-1).Month,
+                PrevYear = dateTime.AddMonths(-1).Year,
+                NextMonth = dateTime.AddMonths(1).Month,
+                NextYear = dateTime.AddMonths(1).Year
+            };
+            return View(calendarViewModel);
         }
 
-        // GET: Calendar/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var @event = await _context.Events
-                .Include(p => p.Instructor)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (@event == null)
-            {
-                return NotFound();
-            }
-
-            return View(@event);
-        }
-
-        // GET: Calendar/Create
-        public IActionResult Create()
-        {
-            ViewData["InstructorFK"] = new SelectList(_context.Instructors, "Id", "Id");
-            return View();
-        }
-
-        // POST: Calendar/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Date,Amount,Type,InstructorFK")] Event @event)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(@event);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["InstructorFK"] = new SelectList(_context.Instructors, "Id", "Id", @event.InstructorFK);
-            return View(@event);
-        }
-
-        // GET: Calendar/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var @event = await _context.Events.FindAsync(id);
-            if (@event == null)
-            {
-                return NotFound();
-            }
-            ViewData["InstructorFK"] = new SelectList(_context.Instructors, "Id", "Id", @event.InstructorFK);
-            return View(@event);
-        }
-
-        // POST: Calendar/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Date,Amount,Type,InstructorFK")] Event @event)
-        {
-            if (id != @event.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(@event);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!EventExists(@event.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["InstructorFK"] = new SelectList(_context.Instructors, "Id", "Id", @event.InstructorFK);
-            return View(@event);
-        }
-
-        // GET: Calendar/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var @event = await _context.Events
-                .Include(p => p.Instructor)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (@event == null)
-            {
-                return NotFound();
-            }
-
-            return View(@event);
-        }
-
-        // POST: Calendar/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var @event = await _context.Events.FindAsync(id);
-            _context.Events.Remove(@event);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
 
         private bool EventExists(int id)
         {
@@ -162,11 +54,18 @@ namespace Gym4you.Controllers
         }
 
         [HttpPost]
-
         public async Task<IActionResult> AddUserToEvent([FromBody] Event eventId)
         {
             IdentityUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
             Event eventObject = await _context.FindAsync<Event>(eventId.Id);
+            int allParticipants = await _context.EventUser.Where(p => p.Event.Id == eventId.Id).CountAsync();
+
+            if (eventObject.Amount < allParticipants + 1)
+            {
+
+                return Json(new { success = false, responseText = "You can't sign up, because there are already enough participants for these event." });
+            }
+
             EventUser eventUser = new EventUser()
             {
                 User = user,
@@ -175,10 +74,14 @@ namespace Gym4you.Controllers
 
             _context.EventUser.Add(eventUser);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return Json(new { success = true }); 
 
         }
 
+        private IActionResult Json(object p, object allowGet)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }
