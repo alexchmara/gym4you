@@ -6,10 +6,48 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Models\ViewModels\**" />
+    <Compile Remove="Views\Calendar\**" />
+    <Compile Remove="Views\Events\**" />
+    <Compile Remove="Views\Instructors\**" />
+    <Content Remove="Models\ViewModels\**" />
+    <Content Remove="Views\Calendar\**" />
+    <Content Remove="Views\Events\**" />
+    <Content Remove="Views\Instructors\**" />
+    <EmbeddedResource Remove="Models\ViewModels\**" />
+    <EmbeddedResource Remove="Views\Calendar\**" />
+    <EmbeddedResource Remove="Views\Events\**" />
+    <EmbeddedResource Remove="Views\Instructors\**" />
+    <None Remove="Models\ViewModels\**" />
+    <None Remove="Views\Calendar\**" />
+    <None Remove="Views\Events\**" />
+    <None Remove="Views\Instructors\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\CalendarController.cs" />
+    <Compile Remove="Controllers\EventsController.cs" />
+    <Compile Remove="Controllers\InstructorsController.cs" />
+    <Compile Remove="Helpers\CalendarTagHelper.cs" />
+    <Compile Remove="Models\Event.cs" />
+    <Compile Remove="Models\EventUser.cs" />
+    <Compile Remove="Models\Instructor.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Models\ViewModels\ErrorViewModel.cs" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="Helpers\" />
   </ItemGroup>
 
 </Project>

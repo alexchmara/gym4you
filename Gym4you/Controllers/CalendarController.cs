@@ -59,6 +59,12 @@ namespace Gym4you.Controllers
             IdentityUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
             Event eventObject = await _context.FindAsync<Event>(eventId.Id);
             int allParticipants = await _context.EventUser.Where(p => p.Event.Id == eventId.Id).CountAsync();
+            bool isExitsUserInEvent = await _context.EventUser.AnyAsync(p => p.Event.Id == eventId.Id && p.User.Id == user.Id);
+            if (isExitsUserInEvent)
+            {
+                return Json(new { success = false, responseText = "You are already registered in this event" });
+
+            }
 
             if (eventObject.Amount < allParticipants + 1)
             {
@@ -74,7 +80,7 @@ namespace Gym4you.Controllers
 
             _context.EventUser.Add(eventUser);
             await _context.SaveChangesAsync();
-            return Json(new { success = true }); 
+            return Json(new { success = true });
 
         }
 
