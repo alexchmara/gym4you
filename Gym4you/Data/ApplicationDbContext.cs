@@ -14,8 +14,8 @@ namespace Gym4you.Data
         {
 
         }
-        //public DbSet<Event> Events { get; set; }
-        //public DbSet<Instructor> Instructors { get; set; }
-        //public DbSet<EventUser> EventUser { get; set; }
+        public DbSet<Event> Events { get; set; }
+        public DbSet<Instructor> Instructors { get; set; }
+        public DbSet<EventUser> EventUser { get; set; }
     }
 }

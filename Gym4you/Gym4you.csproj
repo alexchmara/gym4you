@@ -9,30 +9,17 @@
   <ItemGroup>
     <Compile Remove="Models\ViewModels\**" />
     <Compile Remove="Views\Calendar\**" />
-    <Compile Remove="Views\Events\**" />
-    <Compile Remove="Views\Instructors\**" />
     <Content Remove="Models\ViewModels\**" />
     <Content Remove="Views\Calendar\**" />
-    <Content Remove="Views\Events\**" />
-    <Content Remove="Views\Instructors\**" />
     <EmbeddedResource Remove="Models\ViewModels\**" />
     <EmbeddedResource Remove="Views\Calendar\**" />
-    <EmbeddedResource Remove="Views\Events\**" />
-    <EmbeddedResource Remove="Views\Instructors\**" />
     <None Remove="Models\ViewModels\**" />
     <None Remove="Views\Calendar\**" />
-    <None Remove="Views\Events\**" />
-    <None Remove="Views\Instructors\**" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Remove="Controllers\CalendarController.cs" />
-    <Compile Remove="Controllers\EventsController.cs" />
-    <Compile Remove="Controllers\InstructorsController.cs" />
     <Compile Remove="Helpers\CalendarTagHelper.cs" />
-    <Compile Remove="Models\Event.cs" />
-    <Compile Remove="Models\EventUser.cs" />
-    <Compile Remove="Models\Instructor.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -48,6 +35,20 @@
 
   <ItemGroup>
     <Folder Include="Helpers\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="Views\Events\Create.cshtml" />
+    <None Include="Views\Events\Delete.cshtml" />
+    <None Include="Views\Events\Details.cshtml" />
+    <None Include="Views\Events\Edit.cshtml" />
+    <None Include="Views\Events\Index.cshtml" />
+    <None Include="Views\Instructors\Create.cshtml" />
+    <None Include="Views\Instructors\Delete.cshtml" />
+    <None Include="Views\Instructors\Details.cshtml" />
+    <None Include="Views\Instructors\Edit.cshtml" />
+    <None Include="Views\Instructors\Index.cshtml" />
   </ItemGroup>
 
 </Project>
