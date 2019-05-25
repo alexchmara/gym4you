@@ -1,0 +1,114 @@
+﻿@model Gym4you.Models.ViewModels.CalendarViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Calendar</h1>
+
+<div class="container-fluid">
+
+    <a asp-action="Index" asp-route-month="@Model.PrevMonth" asp-route-year="@Model.PrevYear" class="previous round float-left"><span class="text-dark text-lg-center">&#8249;</span></a>
+    <a asp-action="Index" asp-route-month="@Model.NextMonth" asp-route-year="@Model.NextYear" class="next round float-right"><span class="text-dark text-lg-center">&#8250;</span></a>
+</div>
+<div class="container-fluid">
+    <calendar month="@Model.Month" year="@Model.Year" events="Model.Events.ToList()" />
+</div>
+
+
+<div class="modal fade" id="calendarDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="title" class="col-form-label">Title:</label>
+                    <span type="text" class="form-control" id="title"></span>
+                </div>
+                <div class="form-group">
+                    <label for="fullname" class="col-form-label">Coach:</label>
+                    <span class="form-control" id="fullname"></span>
+                </div>
+                <div class="form-group">
+                    <label for="time" class="col-form-label">Time:</label>
+                    <span class="form-control" id="time"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="amount" class="col-form-label">Maximum number of participants:</label>
+                    <span class="form-control" id="amount"></span>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" onclick="AddUserToEvent()" id="buttonEvent" class="btn btn-primary">Add me to event</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="succesAdded" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body">
+
+
+                <div class="modalbox success center animate">
+                    <div class="icon">
+                        <span class="fa fa-thumbs-up"></span>
+                    </div>
+
+                    <h1>Success!</h1>
+                    <p>
+                        We've sent a confirmation to your e-mail
+                        <br>for verification.
+                    </p>
+                    <button type="button" data-dismiss="modal" class="redo btn">Ok</button>
+
+                </div>
+                <!--/.success-->
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="errorAdded" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="modalbox error  center animate">
+                            <div class="icon">
+                                <span class="fa fa-thumbs-down"></span>
+                            </div>
+                            <!--/.icon-->
+                            <h1>Oh no!</h1>
+                            <p id="errorMsg">
+                                Oops! Something went wrong,
+                                <br> you should try again.
+                            </p>
+                            <button type="button" data-dismiss="modal" class="redo btn">Ok</button>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
