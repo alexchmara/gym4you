@@ -64,13 +64,13 @@ namespace Gym4you.Areas.Identity.Pages.Account
             returnUrl = returnUrl ?? Url.Content("~/");
             if (remoteError != null)
             {
-                ErrorMessage = $"Error from external provider: {remoteError}";
+                ErrorMessage = $"Błąd zewnętrznego providera: {remoteError}";
                 return RedirectToPage("./Login", new {ReturnUrl = returnUrl });
             }
             var info = await _signInManager.GetExternalLoginInfoAsync();
             if (info == null)
             {
-                ErrorMessage = "Error loading external login information.";
+                ErrorMessage = "Błąd ładowania informacji o zewnętrznym loginie.";
                 return RedirectToPage("./Login", new { ReturnUrl = returnUrl });
             }
 
@@ -108,7 +108,7 @@ namespace Gym4you.Areas.Identity.Pages.Account
             var info = await _signInManager.GetExternalLoginInfoAsync();
             if (info == null)
             {
-                ErrorMessage = "Error loading external login information during confirmation.";
+                ErrorMessage = "Błąd podczas ładowania zewnętrznych danych logowania podczas potwierdzania.";
                 return RedirectToPage("./Login", new { ReturnUrl = returnUrl });
             }
 
@@ -122,7 +122,7 @@ namespace Gym4you.Areas.Identity.Pages.Account
                     if (result.Succeeded)
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
-                        _logger.LogInformation("User created an account using {Name} provider.", info.LoginProvider);
+                        _logger.LogInformation("Konto użytkownika zostało pomyślnie utworzone {Name} provider.", info.LoginProvider);
                         return LocalRedirect(returnUrl);
                     }
                 }
