@@ -52,7 +52,7 @@ namespace Gym4you.Areas.Identity.Pages.Account
 
             [DataType(DataType.Password)]
             [Display(Name = "Powtórz hasło")]
-            [Compare("Hasło", ErrorMessage = "Wprowadzone hasła nie zgadzają się.")]
+            [Compare("Password", ErrorMessage = "Wprowadzone hasła nie zgadzają się.")]
             public string ConfirmPassword { get; set; }
         }
 
