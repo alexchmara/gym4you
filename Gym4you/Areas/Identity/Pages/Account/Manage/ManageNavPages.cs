@@ -24,7 +24,7 @@ namespace Gym4you.Areas.Identity.Pages.Account.Manage
 
         public static string PersonalDataNavClass(ViewContext viewContext) => PageNavClass(viewContext, PersonalData);
 
-        public static string UserInformationClass(ViewContext viewContext) => PageNavClass(viewContext, UsersInformation);
+        public static string UserInformationNavClass(ViewContext viewContext) => PageNavClass(viewContext, UsersInformation);
 
         public static string TwoFactorAuthenticationNavClass(ViewContext viewContext) => PageNavClass(viewContext, TwoFactorAuthentication);
 
