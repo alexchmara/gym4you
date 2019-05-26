@@ -840,7 +840,7 @@ $.validator.addMethod( "pattern", function( value, element, param ) {
  */
 $.validator.addMethod( "phoneNL", function( value, element ) {
 	return this.optional( element ) || /^((\+|00(\s|\s?\-\s?)?)31(\s|\s?\-\s?)?(\(0\)[\-\s]?)?|0)[1-9]((\s|\s?\-\s?)?[0-9]){8}$/.test( value );
-}, "Please specify a valid phone number." );
+}, "Podaj prawidłowy numer telefonu." );
 
 /* For UK phone functions, do the following server side processing:
  * Compare original input with this RegEx pattern:
@@ -856,7 +856,7 @@ $.validator.addMethod( "phonesUK", function( phone_number, element ) {
 	phone_number = phone_number.replace( /\(|\)|\s+|-/g, "" );
 	return this.optional( element ) || phone_number.length > 9 &&
 		phone_number.match( /^(?:(?:(?:00\s?|\+)44\s?|0)(?:1\d{8,9}|[23]\d{9}|7(?:[1345789]\d{8}|624\d{6})))$/ );
-}, "Please specify a valid uk phone number" );
+}, "Podaj prawidłowy numer telefonu dla UK." );
 
 /* For UK phone functions, do the following server side processing:
  * Compare original input with this RegEx pattern:
@@ -870,7 +870,7 @@ $.validator.addMethod( "phoneUK", function( phone_number, element ) {
 	phone_number = phone_number.replace( /\(|\)|\s+|-/g, "" );
 	return this.optional( element ) || phone_number.length > 9 &&
 		phone_number.match( /^(?:(?:(?:00\s?|\+)44\s?)|(?:\(?0))(?:\d{2}\)?\s?\d{4}\s?\d{4}|\d{3}\)?\s?\d{3}\s?\d{3,4}|\d{4}\)?\s?(?:\d{5}|\d{3}\s?\d{3})|\d{5}\)?\s?\d{4,5})$/ );
-}, "Please specify a valid phone number" );
+}, "Podaj prawidłowy numer telefonu dla UK." );
 
 /**
  * Matches US phone number format
@@ -892,7 +892,7 @@ $.validator.addMethod( "phoneUS", function( phone_number, element ) {
 	phone_number = phone_number.replace( /\s+/g, "" );
 	return this.optional( element ) || phone_number.length > 9 &&
 		phone_number.match( /^(\+?1-?)?(\([2-9]([02-9]\d|1[02-9])\)|[2-9]([02-9]\d|1[02-9]))-?[2-9]([02-9]\d|1[02-9])-?\d{4}$/ );
-}, "Please specify a valid phone number" );
+}, "Podaj prawidłowy numer telefonu." );
 
 /*
 * Valida CEPs do brasileiros:

@@ -44,7 +44,7 @@ namespace Gym4you.Areas.Identity.Pages.Account.Manage
             public string Email { get; set; }
 
             [Phone]
-            [Display(Name = "Phone number")]
+            [Display(Name = "Numer telefonu")]
             public string PhoneNumber { get; set; }
         }
 
@@ -104,12 +104,12 @@ namespace Gym4you.Areas.Identity.Pages.Account.Manage
                 if (!setPhoneResult.Succeeded)
                 {
                     var userId = await _userManager.GetUserIdAsync(user);
-                    throw new InvalidOperationException($"Unexpected error occurred setting phone number for user with ID '{userId}'.");
+                    throw new InvalidOperationException($"Wystąpił nieoczekiwany błąd podczas wprowadzania numeru telefonu dla użytkownika '{userId}'.");
                 }
             }
 
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your profile has been updated";
+            StatusMessage = "Twoje dane zostały zaktualizowane.";
             return RedirectToPage();
         }
 
