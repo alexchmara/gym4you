@@ -37,8 +37,8 @@ namespace Gym4you.Areas.Identity.Pages.Account.Manage
             public string NewPassword { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm new password")]
-            [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+            [Display(Name = "Wprowadź nowe hasło.")]
+            [Compare("NewPassword", ErrorMessage = "Wprowadzone hasła nie są zgodne.")]
             public string ConfirmPassword { get; set; }
         }
 

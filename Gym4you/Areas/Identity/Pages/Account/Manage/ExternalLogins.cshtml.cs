@@ -36,7 +36,7 @@ namespace Gym4you.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Użytkownik o identyfikatorze: '{_userManager.GetUserId(User)}' nie został znaleziony.");
             }
 
             CurrentLogins = await _userManager.GetLoginsAsync(user);
@@ -52,18 +52,18 @@ namespace Gym4you.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Użytkownik o identyfikatorze: '{_userManager.GetUserId(User)}' nie został znaleziony.");
             }
 
             var result = await _userManager.RemoveLoginAsync(user, loginProvider, providerKey);
             if (!result.Succeeded)
             {
                 var userId = await _userManager.GetUserIdAsync(user);
-                throw new InvalidOperationException($"Unexpected error occurred removing external login for user with ID '{userId}'.");
+                throw new InvalidOperationException($"Wystąpił nieoczekiwany błąd podczas usuwania konta dla użytkownika o identyfikatorze '{userId}'.");
             }
 
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "The external login was removed.";
+            StatusMessage = "Zewnętrzny login został usunięty.";
             return RedirectToPage();
         }
 
@@ -83,25 +83,25 @@ namespace Gym4you.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"NIe można wyszukać następującego użytkownika: '{_userManager.GetUserId(User)}'.");
             }
 
             var info = await _signInManager.GetExternalLoginInfoAsync(await _userManager.GetUserIdAsync(user));
             if (info == null)
             {
-                throw new InvalidOperationException($"Unexpected error occurred loading external login info for user with ID '{user.Id}'.");
+                throw new InvalidOperationException($"Wystąpił nieoczekiwany błąd podczas ładowania danych logowania zewnętrznego dla użytkownika o identyfikatorze '{user.Id}'.");
             }
 
             var result = await _userManager.AddLoginAsync(user, info);
             if (!result.Succeeded)
             {
-                throw new InvalidOperationException($"Unexpected error occurred adding external login for user with ID '{user.Id}'.");
+                throw new InvalidOperationException($"Wystąpił nieoczekiwany błąd podczas dodawania zewnętrznego loginu dla użytkownika o identyfikatorze '{user.Id}'.");
             }
 
             // Clear the existing external cookie to ensure a clean login process
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
-            StatusMessage = "The external login was added.";
+            StatusMessage = "Login zewnętrzny został dodany.";
             return RedirectToPage();
         }
     }
