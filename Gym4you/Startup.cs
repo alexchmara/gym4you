@@ -13,6 +13,8 @@ using Microsoft.EntityFrameworkCore;
 using Gym4you.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Gym4you.Services;
 
 namespace Gym4you
 {
@@ -39,11 +41,19 @@ namespace Gym4you
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<IdentityUser>()
+            services.AddDefaultIdentity<IdentityUser>(config =>
+            {
+                config.SignIn.RequireConfirmedEmail = false;
+               
+            })
                 .AddRoles<IdentityRole>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
+            services.Configure<DataProtectionTokenProviderOptions>(o =>
+               o.TokenLifespan = TimeSpan.FromHours(3));
+
+            services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddJsonOptions(jsonOptions =>
             {
