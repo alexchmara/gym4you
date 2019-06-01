@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -21,6 +22,10 @@ namespace Gym4you.Models
         public int InstructorFK { get; set; }
         [ForeignKey("InstructorFK")]
         public Instructor Instructor { get; set; }
+        [NotMapped]
+        public IEnumerable<SelectListItem> Types { get; set; }
+
+
 
     }
 }
