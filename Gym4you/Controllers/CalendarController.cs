@@ -34,6 +34,11 @@ namespace Gym4you.Controllers
             DateTime dateTime = new DateTime(year ?? DateTime.Now.Year, month ?? DateTime.Now.Month, 1);
             var applicationDbContext = await _context.Events.Include(p => p.Instructor).Where(p => p.Date.Month == (month ?? DateTime.Now.Month) && p.Date.Year == (year ?? DateTime.Now.Year)).ToListAsync();
 
+
+            foreach (var item in applicationDbContext)
+            {
+                item.Amount = item.Amount - _context.EventUser.Where(p => p.Event.Id == item.Id).Count();
+            }
             CalendarViewModel calendarViewModel = new CalendarViewModel()
             {
                 Events = applicationDbContext,
