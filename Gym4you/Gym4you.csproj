@@ -8,21 +8,13 @@
 
   <ItemGroup>
     <Compile Remove="Models\ViewModels\**" />
-    <Compile Remove="Views\Calendar\**" />
     <Content Remove="Models\ViewModels\**" />
-    <Content Remove="Views\Calendar\**" />
     <EmbeddedResource Remove="Models\ViewModels\**" />
-    <EmbeddedResource Remove="Views\Calendar\**" />
     <None Remove="Models\ViewModels\**" />
-    <None Remove="Views\Calendar\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Controllers\CalendarController.cs" />
-    <Compile Remove="Helpers\CalendarTagHelper.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <Compile Include="Models\ViewModels\CalendarViewModel.cs" />
     <Compile Include="Models\ViewModels\ErrorViewModel.cs" />
   </ItemGroup>
 
@@ -30,15 +22,12 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="SendGrid" Version="9.11.0" />
   </ItemGroup>
 
 
   <ItemGroup>
-    <Folder Include="Helpers\" />
-  </ItemGroup>
-
-
-  <ItemGroup>
+    <None Include="Views\Calendar\Index.cshtml" />
     <None Include="Views\Events\Create.cshtml" />
     <None Include="Views\Events\Delete.cshtml" />
     <None Include="Views\Events\Details.cshtml" />

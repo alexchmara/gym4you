@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Gym4you.Data;
 using Gym4you.Models;
+using Gym4you.Services;
 
 namespace Gym4you.Controllers
 {
@@ -48,7 +49,8 @@ namespace Gym4you.Controllers
         // GET: Events/Create
         public IActionResult Create()
         {
-            ViewData["InstructorFK"] = new SelectList(_context.Instructors, "Id", "FirstName");
+            ViewData["InstructorFK"] = new SelectList(_context.Instructors, "Id", "FullName");
+            ViewData["Types"] = TypeWorkoutService.GetTypes();
             return View();
         }
 
@@ -65,7 +67,8 @@ namespace Gym4you.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["InstructorFK"] = new SelectList(_context.Instructors, "Id", "Id", @event.InstructorFK);
+            ViewData["InstructorFK"] = new SelectList(_context.Instructors, "Id", "FullName", @event.InstructorFK);
+            ViewData["Types"] = TypeWorkoutService.GetTypes();
             return View(@event);
         }
 
@@ -82,7 +85,8 @@ namespace Gym4you.Controllers
             {
                 return NotFound();
             }
-            ViewData["InstructorFK"] = new SelectList(_context.Instructors, "Id", "Id", @event.InstructorFK);
+            ViewData["InstructorFK"] = new SelectList(_context.Instructors, "Id", "FullName", @event.InstructorFK);
+            ViewData["Types"] = TypeWorkoutService.GetTypes();
             return View(@event);
         }
 
@@ -118,7 +122,8 @@ namespace Gym4you.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["InstructorFK"] = new SelectList(_context.Instructors, "Id", "Id", @event.InstructorFK);
+            ViewData["InstructorFK"] = new SelectList(_context.Instructors, "Id", "FullName", @event.InstructorFK);
+            ViewData["Types"] = TypeWorkoutService.GetTypes();
             return View(@event);
         }
 

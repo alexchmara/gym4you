@@ -105,7 +105,7 @@ namespace Gym4you.Helpers
                     foreach (var e in eventsList)
                     {
                         xElements.Add(new XElement("p", new XElement("button",
-                                               new XAttribute("class", $"event d-block p-1 pl-2 pr-2 mb-1 rounded text-truncate small bg-{e.Type} text-white btn"),
+                                               new XAttribute("class", $"event d-block p-1 pl-2 pr-2 mb-1 rounded text-truncate small bg-dark text-white btn"),
                                                new XAttribute("title", e.Instructor.FirstName + e.Title ?? "empty"),
                                                new XAttribute("data-toggle", "modal"),
                                                new XAttribute("data-target", "#calendarDetails"),

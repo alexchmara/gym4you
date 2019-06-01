@@ -9,28 +9,29 @@
 <p>
     <a asp-action="Create">Dodaj nowe</a>
 </p>
-<table class="table">
+<table id="table" class="table table-striped table-bordered" style="width:100%">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+                Tytuł
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Date)
+                Data
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Amount)
+                Max uczestników
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Type)
+                Typ treningu
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Instructor.FirstName)
+                Instruktor
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
+<<<<<<< HEAD
 @foreach (var item in Model) {
         <tr>
             <td>
@@ -55,5 +56,41 @@
             </td>
         </tr>
 }
+=======
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Instructor.FirstName)  @Html.DisplayFor(modelItem => item.Instructor.LastName)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+>>>>>>> master
     </tbody>
 </table>
+
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#table').DataTable();
+        });
+    </script>
+}
