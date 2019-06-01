@@ -45,6 +45,7 @@ namespace Gym4you.Areas.Identity.Pages.Account
             public string Password { get; set; }
 
             [Display(Name = "Zapamiętać konto?")]
+
             public bool RememberMe { get; set; }
         }
 
