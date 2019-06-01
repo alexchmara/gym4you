@@ -21,7 +21,19 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="topbar">
+            <div class="container">
+            <div class="content-holder d-flex justify-content-between">
+                <div class="info d-flex">
+                <div class="contact d-flex text-light">
+                    <p><a class="text-light" href="mailto:wsparcie.gym4you@gmail.com"> <i class="fa fa-envelope-o text-green"></i><span class="d-none d-md-inline text-light">wsparcie.gym4you@gmail.com</span></a></p>
+                    <p> <i class="fa fa-phone text-green"></i><span class="d-none d-md-inline">+48 123-456-789</span></p>
+                </div>
+                </div><partial name="_LoginPartial" /></div>
+            </div>
+            </div>
+        </div>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom border-darkblue box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="/img/piąty.svg" alt="logo Gym4You"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -29,9 +41,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <partial name="_LoginPartial" />
                     <partial name="_Menu" />
-
                 </div>
             </div>
         </nav>
