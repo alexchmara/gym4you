@@ -44,7 +44,7 @@ namespace Gym4you
             services.AddDefaultIdentity<IdentityUser>(config =>
             {
                 config.SignIn.RequireConfirmedEmail = false;
-               
+
             })
                 .AddRoles<IdentityRole>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
@@ -111,11 +111,19 @@ namespace Gym4you
             {
                 await RoleManager.CreateAsync(new IdentityRole("User"));
             }
+
             //Assign Admin role to the main User here we have given our newly registered 
             //login id for Admin management
-            //IdentityUser user = await UserManager.FindByEmailAsync("admin@admin.com");
-            //var User = new IdentityUser();
-            //await UserManager.AddToRoleAsync(user, "Admin");
+            IdentityUser user = await UserManager.FindByEmailAsync("admin@admin.com");
+            if (user == null)
+            {
+                var admin = new IdentityUser() { UserName = "admin@admin.com", Email = "admin@admin.com", EmailConfirmed = true };
+                var result = await UserManager.CreateAsync(admin, "Admin123!");
+                if (result.Succeeded)
+                {
+                    await UserManager.AddToRoleAsync(admin, "Admin");
+                }
+            }
         }
     }
 }
