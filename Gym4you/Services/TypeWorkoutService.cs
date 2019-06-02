@@ -12,10 +12,10 @@ namespace Gym4you.Services
         {
             return new SelectListItem[]
             {
-            new SelectListItem() { Text = "Cardio", Value = "Cardio" },
-            new SelectListItem() { Text = "Fitness", Value = "Fitness" },
-            new SelectListItem() { Text = "Interwał", Value = "Interwał" },
-            new SelectListItem() { Text = "Anaerobowy", Value = "Anaerobowy" }
+            new SelectListItem() { Text = "body & mind", Value = "body & mind" },
+            new SelectListItem() { Text = "ogólnorozwojowe", Value = "ogólnorozwojowe" },
+            new SelectListItem() { Text = "sztuki walki", Value = "sztuki walki" },
+            new SelectListItem() { Text = "inne", Value = "inne" }
             };
         }
     }
