@@ -93,4 +93,8 @@ nav.navbar{
   .team-member p {
     margin-top: 0;
   }
+
+  .rotated {
+    transform: rotate(90deg)
+  }
   
