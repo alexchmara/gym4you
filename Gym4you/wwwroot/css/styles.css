@@ -73,7 +73,7 @@ nav.navbar{
     text-transform: none;
   }
 
-  .team-member {
+  .team-member, .gym-class {
     margin-bottom: 50px;
     text-align: center;
   }
@@ -84,17 +84,28 @@ nav.navbar{
     border: 7px solid rgba(0, 0, 0, 0.1);
   }
   
-  .team-member h4 {
+  .team-member h4, .gym-class h4 {
     margin-top: 25px;
     margin-bottom: 0;
     text-transform: none;
   }
   
-  .team-member p {
+  .team-member p, .gym-class p {
     margin-top: 0;
   }
 
   .rotated {
     transform: rotate(90deg)
+  }
+
+  .gym-class img{
+    width: 275px;
+    height: 275px;
+    border: 7px solid rgba(0, 0, 0, 0.1);
+  }
+
+  footer {
+    position: fixed !important;
+    background-color:rgb(244,244,248, 0.8);
   }
   
