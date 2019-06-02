@@ -5,8 +5,9 @@
     ViewData["Title"] = "Index";
     }
 
+    <div class="px-3">
 
-    <h1>Lista Trenerów</h1>
+        <h1>Lista Trenerów</h1>
 
     <p>
         <a asp-action="Create">Dodaj Trenera</a>
@@ -23,25 +24,26 @@
                 <th></th>
             </tr>
         </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FirstName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LastName)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edytuj</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Usuń</a>
-                    </td>   
-                </tr>
-            }
-        </tbody>
-    </table>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LastName)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edytuj</a> |
+                            <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id">Usuń</a>
+                        </td>   
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 
     @section Scripts {
         <script>
