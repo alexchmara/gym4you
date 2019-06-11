@@ -51,7 +51,7 @@ $('#calendarDetails').on('show.bs.modal', function (event) {
     var time = button.data('time');
 
     var modal = $(this);
-    modal.find('.modal-title').text('Details for event ' + title);
+    modal.find('.modal-title').text('Szczegóły zajęć: ' + title);
     modal.find('#amount').text(amount);
     modal.find('#fullname').text(fullname);
     modal.find('#title').text(title);
