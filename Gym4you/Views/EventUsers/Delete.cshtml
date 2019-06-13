@@ -1,0 +1,18 @@
+﻿@model Gym4you.Models.EventUser
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Usuń</h1>
+
+<h3>Czy na pewno usunąć uczestnika <b>@Model.User.UserName</b> z zajęć?</h3>
+<div>
+  
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index" asp-route-id="@Model.Id">Powrót do listy</a>
+    </form>
+</div>
