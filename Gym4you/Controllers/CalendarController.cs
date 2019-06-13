@@ -67,14 +67,14 @@ namespace Gym4you.Controllers
             bool isExitsUserInEvent = await _context.EventUser.AnyAsync(p => p.Event.Id == eventId.Id && p.User.Id == user.Id);
             if (isExitsUserInEvent)
             {
-                return Json(new { success = false, responseText = "You are already registered in this event" });
+                return Json(new { success = false, responseText = "Jesteś już zarejestrowany na te zajęcia." });
 
             }
 
             if (eventObject.Amount < allParticipants + 1)
             {
 
-                return Json(new { success = false, responseText = "You can't sign up, because there are already enough participants for these event." });
+                return Json(new { success = false, responseText = "Nie możesz się zarejestrować, ponieważ jest już komplet uczestników na te zajęcia." });
             }
 
             EventUser eventUser = new EventUser()
