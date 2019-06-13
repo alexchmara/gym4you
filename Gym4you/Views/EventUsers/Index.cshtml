@@ -1,33 +1,32 @@
-﻿@model IEnumerable<Gym4you.Models.Event>
+﻿@model IEnumerable<Gym4you.Models.EventUser>
 
 @{
     ViewData["Title"] = "Index";
 }
 
+
+
+
+
+
 <div class="px-3">
 
-    <h1>Lista zajęć</h1>
+    <h1>Lista uczestników</h1>
 
-    <p>
-        <a asp-action="Create">Dodaj nowe</a>
-    </p>
     <table id="table" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
                 <th>
-                    Tytuł
+                    Uczestnik
                 </th>
                 <th>
-                    Data
-                </th>
-                <th>
-                  Ilość wolnych miejsc
-                </th>
-                <th>
-                    Typ treningu
+                    Nazwa treningu
                 </th>
                 <th>
                     Instruktor
+                </th>
+                <th>
+                    Data i godzina zajęć
                 </th>
                 <th></th>
             </tr>
@@ -38,23 +37,19 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Title)
+                        @Html.DisplayFor(modelItem => item.User.UserName)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Date)
+                        @Html.DisplayFor(modelItem => item.Event.Title)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Amount)
+                        @Html.DisplayFor(modelItem => item.Event.Instructor.FullName)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Type)
+                        @Html.DisplayFor(modelItem => item.Event.Date)
                     </td>
+
                     <td>
-                        @Html.DisplayFor(modelItem => item.Instructor.FirstName)  @Html.DisplayFor(modelItem => item.Instructor.LastName)
-                    </td>
-                    <td>
-                        <a  asp-controller="EventUsers" asp-action="Index" asp-route-id="@item.Id">Lista uczestników</a> |
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edytuj</a> |
                         <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a> |
                         <a asp-action="Delete" asp-route-id="@item.Id">Usuń</a>
                     </td>
