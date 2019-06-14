@@ -4,62 +4,57 @@
     ViewData["Title"] = "Index";
 }
 
+    <div class="px-3 pb-5 pt-3">
 
+        <h1>Lista uczestników</h1>
 
-
-
-
-<div class="px-3">
-
-    <h1>Lista uczestników</h1>
-
-    <table id="table" class="table table-striped table-bordered" style="width:100%">
-        <thead>
-            <tr>
-                <th>
-                    Uczestnik
-                </th>
-                <th>
-                    Nazwa treningu
-                </th>
-                <th>
-                    Instruktor
-                </th>
-                <th>
-                    Data i godzina zajęć
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-
-            @foreach (var item in Model)
-            {
+        <table id="table" class="table table-striped table-bordered" style="width:100%">
+            <thead>
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.User.UserName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Event.Title)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Event.Instructor.FullName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Event.Date)
-                    </td>
-
-                    <td>
-                        <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Usuń</a>
-                    </td>
+                    <th>
+                        Uczestnik
+                    </th>
+                    <th>
+                        Nazwa treningu
+                    </th>
+                    <th>
+                        Instruktor
+                    </th>
+                    <th>
+                        Data i godzina zajęć
+                    </th>
+                    <th></th>
                 </tr>
-            }
+            </thead>
+            <tbody>
 
-        </tbody>
-    </table>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.UserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Event.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Event.Instructor.FullName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Event.Date)
+                        </td>
 
-</div>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id">Usuń</a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+    </div>
 
 
 @section Scripts {
