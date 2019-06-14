@@ -6,8 +6,13 @@
         <li class="nav-item">
             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Strona główna</a>
         </li>
+<<<<<<< HEAD
         @if (User.IsInRole("Admin"))
           {
+=======
+        @*@if (User.IsInRole("Admin"))*@
+        @*  {*@
+>>>>>>> 9cdad974f6e1b4238ebf88d1bf331ca3d4053221
         <li class="nav-item">
             <a class="nav-link text-dark" asp-area="" asp-controller="Events" asp-action="Index">Zajęcia</a>
         </li>
@@ -18,6 +23,7 @@
             <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">Użytkownicy</a>
         </li>
 
+<<<<<<< HEAD
           }
 
         @if (SignInManager.IsSignedIn(User))
@@ -26,4 +32,14 @@
             <a class="nav-link text-dark" asp-area="" asp-controller="Calendar" asp-action="Index">Grafik</a>
         </li>
           }
+=======
+        @*  }*@
+
+        @*@if (SignInManager.IsSignedIn(User))*@
+        @*  {*@
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Calendar" asp-action="Index">Grafik</a>
+        </li>
+        @*  }*@
+>>>>>>> 9cdad974f6e1b4238ebf88d1bf331ca3d4053221
     </ul>
